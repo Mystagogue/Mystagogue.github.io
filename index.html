@@ -1,37 +1,202 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Startup</title>
+<head>
+<style>
+html {
+	/*overflow: hidden;
+	touch-action: none;
+	content-zooming: none;*/
+}
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+body {
+	position: absolute;
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	height: 100%;	
+}
 
-    <!-- Note that the below Bootstrap file is a specific version. If you grab the most
-    current from Bootstrap website, you will see the button grow transition being a lot faster
-    than in my video. Use whichever style sheet you like best! -->
-    <!-- Bootstrap CSS from a CDN. This way you don't have to include the bootstrap file yourself -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+#screen {
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	background: rgb(252,176,69);
+	background: radial-gradient(circle, rgba(252,176,69,1) 0%, rgba(253,29,29,1) 29%, rgba(0,0,0,1) 60%);
+	perspective: 700px;
+}
 
-    <!-- My own stylesheet -->
-    <link href="style.css" rel="stylesheet">
-  </head>
-  <body>
-    <header class="startup text-center text-white d-flex">
-      <div class="container my-auto">
-        <div class="row">
-          <div class="col-lg-12 my-auto">
-            <h1 class="text-uppercase faded">
-              <strong>the biggest startup event of the year</strong>
-            </h1>
-            <hr>
-          </div>
-          <div class="col-lg-12 my-auto">
-            <button class="btn btn-primary btn-xl">Find Out More</button>
-          </div>
-        </div>
-      </div>
-    </header>
 
-  </body>
+.cube {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: auto;
+	height: auto;
+	margin: 0;
+	user-select: none;
+	transform-style: preserve-3d;
+	transform-origin: center center;
+	transform: translateZ(100px) translateY(-140px) rotateX(-8deg);
+}
 
-</html>
+
+.face {
+	position: absolute;
+	margin-left: -300px;
+	margin-top: -200px;
+	width: 600px;
+	height: 400px;
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+	transition: outline 0.5s ease-in-out 0s;
+	cursor: pointer;
+	background-color: skyblue;
+	opacity: 0.5;
+}
+
+.picture {
+	position: absolute;
+	left: -50px;
+	top: -50px;
+	width: 100px;
+	height: 100px;
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+	transition: outline 0.5s ease-in-out 0s;
+	cursor: pointer;
+	opacity: 0.5;
+}
+
+.monk {
+	position: absolute;
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+	transition: outline 0.5s ease-in-out 0s;
+	cursor: pointer;
+}
+
+</style>
+</head>
+<body>
+
+<div id="screen" >
+	<div id="cube" class='cube'>
+				
+
+			<div id="1" class='monk' style="transform: translateY(0px) translateZ(-250px) translateX(-100px); top: -100px; left: -100px;"><img src="images/LargeTingZi.png" width="400px" height="400px"></div>
+
+			<div id="1" class='monk' style="transform: translateY(100px) translateZ(-350px) translateX(-50px); "><img src="images/SmallTingZi.png" width="100px" height="100px"></div>
+
+
+		<!-- 		<div style="opacity: 0.3; transform: translateY(-80px) translateZ(-400px) translateX(-1100px) ;">
+			<div id="1" class='monk' style="transform: rotateY(40deg);"><img src="images/Building1.png" width="1245px" height="400px"></div>
+			</div>
+
+			<div style="opacity: 0.3; transform: translateY(-80px) translateZ(-400px) translateX(1100px) rotateY(180deg);">
+					<div id="1" class='monk' style="transform: rotateY(40deg);"><img src="images/Building1.png" width="1245px" height="400px"></div>
+			</div> -->
+
+
+
+	
+			<div id="1" class='monk' style="transform: translateY(-80px) translateZ(-400px) translateX(-950px) ;"><img src="images/Building1.png" width="950px" height="400px"></div>
+
+			<div id="1" class='monk' style="transform: translateY(-80px) translateZ(-400px) translateX(-18px) ;"><img src="images/Building2.png" width="950px" height="400px"></div>
+
+	<!-- 		<div id="1" class='monk' style="transform: translateY(-80px) translateZ(-400px) translateX(1100px) rotateY(180deg);"><img src="images/Building1.png" width="1245px" height="400px"></div>
+	 -->
+
+			<!-- Trees two big in front-->
+			<div id="1" class='monk' style="transform: translateY(-100px) translateZ(-350px) translateX(-400px); top: -100px; left: -100px;"><img src="images/Tree1.png" width="300px" height="475px"></div>
+
+			<div id="1" class='monk' style="transform: translateY(-100px) translateZ(-350px) translateX(300px); top: -100px; left: -100px;"><img src="images/Tree2.png" width="300px" height="475px"></div>
+
+			<!-- Trees 2 big behind -->
+			<div id="1" class='monk' style="transform: translateY(-100px) translateZ(-450px) translateX(550px); top: -100px; left: -100px;"><img src="images/Tree1.png" width="300px" height="475px"></div>
+
+			<div id="1" class='monk' style="transform: translateY(-100px) translateZ(-450px) translateX(-650px); top: -100px; left: -100px;"><img src="images/Tree2.png" width="300px" height="475px"></div>
+
+			<!-- Trees 2 small in front -->
+			<div id="1" class='monk' style="transform: translateY(0px) translateZ(-200px) translateX(-650px); top: -100px; left: -100px;"><img src="images/Tree4.png" width="230px" height="355px"></div>
+
+			<div id="1" class='monk' style="transform: translateY(0px) translateZ(-200px) translateX(650px); top: -100px; left: -100px;"><img src="images/Tree3.png" width="230px" height="355px"></div>
+
+			<!-- Burning Sun -->
+			<div id="1" class='monk' style="transform: translateY(-400px) translateZ(-750px) translateX(-180px); top: -100px; left: -100px;"><img src="images/BurningSun.png" width="600px" height="600px"></div>
+
+
+		
+			<!-- Monks -->
+		
+			<div id="1" class='monk' style="transform: translateY(150px) translateZ(200px) translateX(-30px); "><img src="images/monk16.png" width="150px" height="150px"></div>
+			<div id="1" class='monk' style="transform: translateY(150px) translateZ(200px) translateX(-130px); "><img src="images/monk15.png" width="150px" height="150px"></div>
+
+			<div id="1" class='monk' style="transform: translateY(150px) translateZ(140px) translateX(70px); "><img src="images/monk19.png" width="150px" height="150px"></div>
+			<div id="1" class='monk' style="transform: translateY(150px) translateZ(140px) translateX(180px); "><img src="images/monk20.png" width="150px" height="150px"></div>
+
+			<div id="1" class='monk' style="transform: translateY(150px) translateZ(140px) translateX(-220px); "><img src="images/monk7.png" width="150px" height="150px"></div>
+			<div id="1" class='monk' style="transform: translateY(150px) translateZ(140px) translateX(-320px); "><img src="images/monk8.png" width="150px" height="150px"></div>
+
+			<div id="1" class='monk' style="transform: translateY(150px) translateZ(-71px) translateX(-45px); "><img src="images/monk17.png" width="150px" height="150px"></div>
+			<div id="1" class='monk' style="transform: translateY(150px) translateZ(-70px) translateX(-120px); "><img src="images/monk18.png" width="150px" height="150px"></div>
+
+			<div id="1" class='monk' style="transform: translateY(150px) translateZ(20px) translateX(30px); "><img src="images/monk5.png" width="150px" height="150px"></div>
+			<div id="1" class='monk' style="transform: translateY(150px) translateZ(20px) translateX(140px); "><img src="images/monk6.png" width="150px" height="150px"></div>
+
+			<div id="1" class='monk' style="transform: translateY(150px) translateZ(20px) translateX(-180px); "><img src="images/monk10.png" width="150px" height="150px"></div>
+			<div id="1" class='monk' style="transform: translateY(150px) translateZ(20px) translateX(-280px); "><img src="images/monk9.png" width="150px" height="150px"></div>
+
+			<div id="1" class='monk' style="transform: translateY(150px) translateZ(-70px) translateX(285px); "><img src="images/monk13.png" width="150px" height="150px"></div>
+			<div id="1" class='monk' style="transform: translateY(150px) translateZ(-71px) translateX(360px); "><img src="images/monk14.png" width="150px" height="150px"></div>
+
+			<div id="1" class='monk' style="transform: translateY(150px) translateZ(-70px) translateX(-500px); "><img src="images/monk11.png" width="150px" height="150px"></div>
+			<div id="1" class='monk' style="transform: translateY(150px) translateZ(-71px) translateX(-400px); "><img src="images/monk12.png" width="150px" height="150px"></div>
+
+			<div id="1" class='monk' style="transform: translateY(150px) translateZ(-190px) translateX(-420px); "><img src="images/monk1.png" width="150px" height="150px"></div>
+			<div id="1" class='monk' style="transform: translateY(150px) translateZ(-190px) translateX(-300px); "><img src="images/monk2.png" width="150px" height="150px"></div>
+
+			<div id="1" class='monk' style="transform: translateY(150px) translateZ(-190px) translateX(310px); "><img src="images/monk3.png" width="150px" height="150px"></div>
+			<div id="1" class='monk' style="transform: translateY(150px) translateZ(-190px) translateX(200px); "><img src="images/monk4.png" width="150px" height="150px"></div>
+		
+	</div><!-- Cube -->
+
+</div><!-- Screen -->
+
+<script type="text/javascript">
+
+const cube = document.getElementById("cube");
+
+
+let xVal = 25;
+let yVal = 25;
+
+function cameraMove(xPos, yPos) {
+	var winHeight = window.innerHeight / 2;
+	var winWidth = window.innerWidth / 2;
+
+	cube.style.transform = `rotateY(${(xPos - winWidth) / 25}deg) rotateX(${(-(yPos - winHeight) / 25) - 8}deg) translateZ(100px) translateY(-140px)`;
+}
+
+
+let moveControl = (e) => {
+	cube.style.transition = `transform 0.01s ease-in-out 0s`;
+	cameraMove(e.clientX, e.clientY);
+	// console.log(e.clientX, e.clientY);
+}
+
+
+let resetToCenter = () => {
+	cube.style.transition = `transform 0.5s ease-in-out 0s`;
+	cameraMove(window.innerWidth / 2, window.innerHeight / 2);
+}
+
+
+
+document.addEventListener("mousemove", moveControl);
+
+document.addEventListener("mouseleave", resetToCenter);
+
+window.addEventListener("mouseout", resetToCenter);
+
+
+
+</script>
+</body>
