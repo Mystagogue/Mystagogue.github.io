@@ -1,92 +1,182 @@
 <head>
-<style>
-html {
-	/*overflow: hidden;
-	touch-action: none;
-	content-zooming: none;*/
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <style>
+    html {
+      /*overflow: hidden;
+    touch-action: none;
+    content-zooming: none;*/
+    }
 
-body {
-	position: absolute;
-	margin: 0px;
-	padding: 0px;
-	width: 100%;
-	height: 100%;	
-}
+    body {
+      position: absolute;
+      margin: 0px;
+      padding: 0px;
+      width: 100%;
+      height: 100%;
+      font-family: "Josefin Sans", sans-serif;
+      user-select: none;
+    }
 
-#screen {
-	overflow: hidden;
-	width: 100%;
-	height: 100%;
-	background: rgb(252,176,69);
-	background: radial-gradient(circle, rgba(252,176,69,1) 0%, rgba(253,29,29,1) 29%, rgba(0,0,0,1) 60%);
-	perspective: 700px;
-}
+    #menu {
+      overflow: hidden;
+      width: 100%;
+      height: 100px;
+      position: fixed;
+      bottom: 0px;
+      left: 0px;
+      border-top: 2px solid #3e69b0;
+      color: #badfe7;
+      background-color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
+    a {
+      text-decoration: none;
+    }
 
-.cube {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: auto;
-	height: auto;
-	margin: 0;
-	user-select: none;
-	transform-style: preserve-3d;
-	transform-origin: center center;
-	transform: translateZ(100px) translateY(-140px) rotateX(-8deg);
-}
+    #inner-menu {
+      /* overflow: hidden;
+      width: 100%;
+      height: 100px;
+      position: fixed;
+      bottom: 0px;
+      left: 0px;
+      color: #badfe7;
+      background-color: black; */
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+      width: 100vw;
+      max-width: 1200px;
+    }
 
+    .menu-block {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 25px;
+    }
 
-.face {
-	position: absolute;
-	margin-left: -300px;
-	margin-top: -200px;
-	width: 600px;
-	height: 400px;
-	backface-visibility: hidden;
-	-webkit-backface-visibility: hidden;
-	transition: outline 0.5s ease-in-out 0s;
-	cursor: pointer;
-	background-color: skyblue;
-	opacity: 0.5;
-}
+    button {
+      color: #3e69b0;
+      background-color: transparent;
+      margin: 0px;
+      padding: 8px;
+      border: 1px solid #3e69b0;
+      border-radius: 12px;
+      font-family: sans-serif;
+      font-size: 16px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 5px;
+    }
 
-.picture {
-	position: absolute;
-	left: -50px;
-	top: -50px;
-	width: 100px;
-	height: 100px;
-	backface-visibility: hidden;
-	-webkit-backface-visibility: hidden;
-	transition: outline 0.5s ease-in-out 0s;
-	cursor: pointer;
-	opacity: 0.5;
-}
+    button svg {
+      width: 17px;
+      height: 17px;
+      fill: #3e69b0;
+    }
 
-.monk {
-	position: absolute;
-	backface-visibility: hidden;
-	-webkit-backface-visibility: hidden;
-	transition: outline 0.5s ease-in-out 0s;
-	cursor: pointer;
-}
+    button:active svg {
+      fill: #badfe7;
+    }
 
-</style>
+    button:hover {
+      background-color: #1a2340;
+    }
+
+    button:active {
+      color: #badfe7;
+      border-color: #badfe7;
+      background-color: #1a2340;
+    }
+
+    .heading {
+      color: #badfe7;
+      margin: 0px;
+      padding-bottom: 0px;
+    }
+
+    .subscript {
+      color: #3e69b0;
+      margin: 0px;
+      padding-top: 0px;
+      font-style: italic;
+    }
+
+    #screen {
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      background: rgb(252, 176, 69);
+      background: radial-gradient(circle, rgba(252, 176, 69, 1) 0%, rgba(253, 29, 29, 1) 29%, rgba(0, 0, 0, 1) 60%);
+      perspective: 700px;
+    }
+
+    .cube {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: auto;
+      height: auto;
+      margin: 0;
+      user-select: none;
+      transform-style: preserve-3d;
+      transform-origin: center center;
+      transform: translateZ(100px) translateY(-140px) rotateX(-8deg);
+    }
+
+    .face {
+      position: absolute;
+      margin-left: -300px;
+      margin-top: -200px;
+      width: 600px;
+      height: 400px;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transition: outline 0.5s ease-in-out 0s;
+      cursor: pointer;
+      background-color: skyblue;
+      opacity: 0.5;
+    }
+
+    .picture {
+      position: absolute;
+      left: -50px;
+      top: -50px;
+      width: 100px;
+      height: 100px;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transition: outline 0.5s ease-in-out 0s;
+      cursor: pointer;
+      opacity: 0.5;
+    }
+
+    .monk {
+      position: absolute;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transition: outline 0.5s ease-in-out 0s;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
+  <div id="screen">
+    <div id="cube" class="cube">
+      <div id="1" class="monk" style="transform: translateY(0px) translateZ(-250px) translateX(-100px); top: -100px; left: -100px"><img src="images/LargeTingZi.png" width="400px" height="400px" /></div>
 
-<div id="screen" >
-	<div id="cube" class='cube'>
-				
+      <div id="1" class="monk" style="transform: translateY(100px) translateZ(-350px) translateX(-50px)"><img src="images/SmallTingZi.png" width="100px" height="100px" /></div>
 
-			<div id="1" class='monk' style="transform: translateY(0px) translateZ(-250px) translateX(-100px); top: -100px; left: -100px;"><img src="images/LargeTingZi.png" width="400px" height="400px"></div>
-
-			<div id="1" class='monk' style="transform: translateY(100px) translateZ(-350px) translateX(-50px); "><img src="images/SmallTingZi.png" width="100px" height="100px"></div>
-
-
-		<!-- 		<div style="opacity: 0.3; transform: translateY(-80px) translateZ(-400px) translateX(-1100px) ;">
+      <!-- 		<div style="opacity: 0.3; transform: translateY(-80px) translateZ(-400px) translateX(-1100px) ;">
 			<div id="1" class='monk' style="transform: rotateY(40deg);"><img src="images/Building1.png" width="1245px" height="400px"></div>
 			</div>
 
@@ -94,109 +184,163 @@ body {
 					<div id="1" class='monk' style="transform: rotateY(40deg);"><img src="images/Building1.png" width="1245px" height="400px"></div>
 			</div> -->
 
+      <div id="1" class="monk" style="transform: translateY(-80px) translateZ(-400px) translateX(-950px)"><img src="images/Building1.png" width="950px" height="400px" /></div>
 
+      <div id="1" class="monk" style="transform: translateY(-80px) translateZ(-400px) translateX(-18px)"><img src="images/Building2.png" width="950px" height="400px" /></div>
 
-	
-			<div id="1" class='monk' style="transform: translateY(-80px) translateZ(-400px) translateX(-950px) ;"><img src="images/Building1.png" width="950px" height="400px"></div>
-
-			<div id="1" class='monk' style="transform: translateY(-80px) translateZ(-400px) translateX(-18px) ;"><img src="images/Building2.png" width="950px" height="400px"></div>
-
-	<!-- 		<div id="1" class='monk' style="transform: translateY(-80px) translateZ(-400px) translateX(1100px) rotateY(180deg);"><img src="images/Building1.png" width="1245px" height="400px"></div>
+      <!-- 		<div id="1" class='monk' style="transform: translateY(-80px) translateZ(-400px) translateX(1100px) rotateY(180deg);"><img src="images/Building1.png" width="1245px" height="400px"></div>
 	 -->
 
-			<!-- Trees two big in front-->
-			<div id="1" class='monk' style="transform: translateY(-100px) translateZ(-350px) translateX(-400px); top: -100px; left: -100px;"><img src="images/Tree1.png" width="300px" height="475px"></div>
+      <!-- Trees two big in front-->
+      <div id="1" class="monk" style="transform: translateY(-100px) translateZ(-350px) translateX(-400px); top: -100px; left: -100px"><img src="images/Tree1.png" width="300px" height="475px" /></div>
 
-			<div id="1" class='monk' style="transform: translateY(-100px) translateZ(-350px) translateX(300px); top: -100px; left: -100px;"><img src="images/Tree2.png" width="300px" height="475px"></div>
+      <div id="1" class="monk" style="transform: translateY(-100px) translateZ(-350px) translateX(300px); top: -100px; left: -100px"><img src="images/Tree2.png" width="300px" height="475px" /></div>
 
-			<!-- Trees 2 big behind -->
-			<div id="1" class='monk' style="transform: translateY(-100px) translateZ(-450px) translateX(550px); top: -100px; left: -100px;"><img src="images/Tree1.png" width="300px" height="475px"></div>
+      <!-- Trees 2 big behind -->
+      <div id="1" class="monk" style="transform: translateY(-100px) translateZ(-450px) translateX(550px); top: -100px; left: -100px"><img src="images/Tree1.png" width="300px" height="475px" /></div>
 
-			<div id="1" class='monk' style="transform: translateY(-100px) translateZ(-450px) translateX(-650px); top: -100px; left: -100px;"><img src="images/Tree2.png" width="300px" height="475px"></div>
+      <div id="1" class="monk" style="transform: translateY(-100px) translateZ(-450px) translateX(-650px); top: -100px; left: -100px"><img src="images/Tree2.png" width="300px" height="475px" /></div>
 
-			<!-- Trees 2 small in front -->
-			<div id="1" class='monk' style="transform: translateY(0px) translateZ(-200px) translateX(-650px); top: -100px; left: -100px;"><img src="images/Tree4.png" width="230px" height="355px"></div>
+      <!-- Trees 2 small in front -->
+      <div id="1" class="monk" style="transform: translateY(0px) translateZ(-200px) translateX(-650px); top: -100px; left: -100px"><img src="images/Tree4.png" width="230px" height="355px" /></div>
 
-			<div id="1" class='monk' style="transform: translateY(0px) translateZ(-200px) translateX(650px); top: -100px; left: -100px;"><img src="images/Tree3.png" width="230px" height="355px"></div>
+      <div id="1" class="monk" style="transform: translateY(0px) translateZ(-200px) translateX(650px); top: -100px; left: -100px"><img src="images/Tree3.png" width="230px" height="355px" /></div>
 
-			<!-- Burning Sun -->
-			<div id="1" class='monk' style="transform: translateY(-400px) translateZ(-750px) translateX(-180px); top: -100px; left: -100px;"><img src="images/BurningSun.png" width="600px" height="600px"></div>
+      <!-- Burning Sun -->
+      <div id="1" class="monk" style="transform: translateY(-400px) translateZ(-750px) translateX(-180px); top: -100px; left: -100px"><img src="images/BurningSun.png" width="600px" height="600px" /></div>
 
+      <!-- Monks -->
 
-		
-			<!-- Monks -->
-		
-			<div id="1" class='monk' style="transform: translateY(150px) translateZ(200px) translateX(-30px); "><img src="images/Monk16.png" width="150px" height="150px"></div>
-			<div id="1" class='monk' style="transform: translateY(150px) translateZ(200px) translateX(-130px); "><img src="images/Monk15.png" width="150px" height="150px"></div>
+      <div id="1" class="monk" style="transform: translateY(150px) translateZ(200px) translateX(-30px)"><img src="images/Monk16.png" width="150px" height="150px" /></div>
+      <div id="1" class="monk" style="transform: translateY(150px) translateZ(200px) translateX(-130px)"><img src="images/Monk15.png" width="150px" height="150px" /></div>
 
-			<div id="1" class='monk' style="transform: translateY(150px) translateZ(140px) translateX(70px); "><img src="images/Monk19.png" width="150px" height="150px"></div>
-			<div id="1" class='monk' style="transform: translateY(150px) translateZ(140px) translateX(180px); "><img src="images/Monk20.png" width="150px" height="150px"></div>
+      <div id="1" class="monk" style="transform: translateY(150px) translateZ(140px) translateX(70px)"><img src="images/Monk19.png" width="150px" height="150px" /></div>
+      <div id="1" class="monk" style="transform: translateY(150px) translateZ(140px) translateX(180px)"><img src="images/Monk20.png" width="150px" height="150px" /></div>
 
-			<div id="1" class='monk' style="transform: translateY(150px) translateZ(140px) translateX(-220px); "><img src="images/Monk7.png" width="150px" height="150px"></div>
-			<div id="1" class='monk' style="transform: translateY(150px) translateZ(140px) translateX(-320px); "><img src="images/Monk8.png" width="150px" height="150px"></div>
+      <div id="1" class="monk" style="transform: translateY(150px) translateZ(140px) translateX(-220px)"><img src="images/Monk7.png" width="150px" height="150px" /></div>
+      <div id="1" class="monk" style="transform: translateY(150px) translateZ(140px) translateX(-320px)"><img src="images/Monk8.png" width="150px" height="150px" /></div>
 
-			<div id="1" class='monk' style="transform: translateY(150px) translateZ(-71px) translateX(-45px); "><img src="images/Monk17.png" width="150px" height="150px"></div>
-			<div id="1" class='monk' style="transform: translateY(150px) translateZ(-70px) translateX(-120px); "><img src="images/Monk18.png" width="150px" height="150px"></div>
+      <div id="1" class="monk" style="transform: translateY(150px) translateZ(-71px) translateX(-45px)"><img src="images/Monk17.png" width="150px" height="150px" /></div>
+      <div id="1" class="monk" style="transform: translateY(150px) translateZ(-70px) translateX(-120px)"><img src="images/Monk18.png" width="150px" height="150px" /></div>
 
-			<div id="1" class='monk' style="transform: translateY(150px) translateZ(20px) translateX(30px); "><img src="images/Monk5.png" width="150px" height="150px"></div>
-			<div id="1" class='monk' style="transform: translateY(150px) translateZ(20px) translateX(140px); "><img src="images/Monk6.png" width="150px" height="150px"></div>
+      <div id="1" class="monk" style="transform: translateY(150px) translateZ(20px) translateX(30px)"><img src="images/Monk5.png" width="150px" height="150px" /></div>
+      <div id="1" class="monk" style="transform: translateY(150px) translateZ(20px) translateX(140px)"><img src="images/Monk6.png" width="150px" height="150px" /></div>
 
-			<div id="1" class='monk' style="transform: translateY(150px) translateZ(20px) translateX(-180px); "><img src="images/Monk10.png" width="150px" height="150px"></div>
-			<div id="1" class='monk' style="transform: translateY(150px) translateZ(20px) translateX(-280px); "><img src="images/Monk9.png" width="150px" height="150px"></div>
+      <div id="1" class="monk" style="transform: translateY(150px) translateZ(20px) translateX(-180px)"><img src="images/Monk10.png" width="150px" height="150px" /></div>
+      <div id="1" class="monk" style="transform: translateY(150px) translateZ(20px) translateX(-280px)"><img src="images/Monk9.png" width="150px" height="150px" /></div>
 
-			<div id="1" class='monk' style="transform: translateY(150px) translateZ(-70px) translateX(285px); "><img src="images/Monk13.png" width="150px" height="150px"></div>
-			<div id="1" class='monk' style="transform: translateY(150px) translateZ(-71px) translateX(360px); "><img src="images/Monk14.png" width="150px" height="150px"></div>
+      <div id="1" class="monk" style="transform: translateY(150px) translateZ(-70px) translateX(285px)"><img src="images/Monk13.png" width="150px" height="150px" /></div>
+      <div id="1" class="monk" style="transform: translateY(150px) translateZ(-71px) translateX(360px)"><img src="images/Monk14.png" width="150px" height="150px" /></div>
 
-			<div id="1" class='monk' style="transform: translateY(150px) translateZ(-70px) translateX(-500px); "><img src="images/Monk11.png" width="150px" height="150px"></div>
-			<div id="1" class='monk' style="transform: translateY(150px) translateZ(-71px) translateX(-400px); "><img src="images/Monk12.png" width="150px" height="150px"></div>
+      <div id="1" class="monk" style="transform: translateY(150px) translateZ(-70px) translateX(-500px)"><img src="images/Monk11.png" width="150px" height="150px" /></div>
+      <div id="1" class="monk" style="transform: translateY(150px) translateZ(-71px) translateX(-400px)"><img src="images/Monk12.png" width="150px" height="150px" /></div>
 
-			<div id="1" class='monk' style="transform: translateY(150px) translateZ(-190px) translateX(-420px); "><img src="images/Monk1.png" width="150px" height="150px"></div>
-			<div id="1" class='monk' style="transform: translateY(150px) translateZ(-190px) translateX(-300px); "><img src="images/Monk2.png" width="150px" height="150px"></div>
+      <div id="1" class="monk" style="transform: translateY(150px) translateZ(-190px) translateX(-420px)"><img src="images/Monk1.png" width="150px" height="150px" /></div>
+      <div id="1" class="monk" style="transform: translateY(150px) translateZ(-190px) translateX(-300px)"><img src="images/Monk2.png" width="150px" height="150px" /></div>
 
-			<div id="1" class='monk' style="transform: translateY(150px) translateZ(-190px) translateX(310px); "><img src="images/Monk3.png" width="150px" height="150px"></div>
-			<div id="1" class='monk' style="transform: translateY(150px) translateZ(-190px) translateX(200px); "><img src="images/Monk4.png" width="150px" height="150px"></div>
-		
-	</div><!-- Cube -->
+      <div id="1" class="monk" style="transform: translateY(150px) translateZ(-190px) translateX(310px)"><img src="images/Monk3.png" width="150px" height="150px" /></div>
+      <div id="1" class="monk" style="transform: translateY(150px) translateZ(-190px) translateX(200px)"><img src="images/Monk4.png" width="150px" height="150px" /></div>
+    </div>
+    <!-- Cube -->
+  </div>
+  <!-- Screen -->
 
-</div><!-- Screen -->
+  <div id="menu">
+    <div id="inner-menu">
+      <div class="menu-block">
+        <div class="menu-item" style="margin-left: 25px">
+          <img src="images/dragonPearl.png" width="100px" />
+        </div>
 
-<script type="text/javascript">
+        <div class="menu-item">
+          <h2 class="heading">Joshua Viney</h2>
+          <p class="subscript">Javascript Engineer</p>
+        </div>
+      </div>
+      <div class="menu-block">
+        <div class="menu-item">
+          <button>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+              <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+              <path d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128z" />
+            </svg>
+            <span>Curriculum Vitae</span>
+          </button>
+        </div>
+        <div class="menu-item">
+          <button>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+              <path d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V304H176c-35.3 0-64 28.7-64 64V512H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128zM176 352h32c30.9 0 56 25.1 56 56s-25.1 56-56 56H192v32c0 8.8-7.2 16-16 16s-16-7.2-16-16V448 368c0-8.8 7.2-16 16-16zm32 80c13.3 0 24-10.7 24-24s-10.7-24-24-24H192v48h16zm96-80h32c26.5 0 48 21.5 48 48v64c0 26.5-21.5 48-48 48H304c-8.8 0-16-7.2-16-16V368c0-8.8 7.2-16 16-16zm32 128c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H320v96h16zm80-112c0-8.8 7.2-16 16-16h48c8.8 0 16 7.2 16 16s-7.2 16-16 16H448v32h32c8.8 0 16 7.2 16 16s-7.2 16-16 16H448v48c0 8.8-7.2 16-16 16s-16-7.2-16-16V432 368z" />
+            </svg>
+            <span>CV</span>
+          </button>
+        </div>
+        <div class="menu-item">
+          <a href="https://github.com/Mystagogue/puppet-master" target="_blank">
+            <button>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
+                <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z" />
+              </svg>
+              <span>Github</span>
+            </button>
+          </a>
+        </div>
+        <div class="menu-item">
+          <a href="https://www.youtube.com/@shaolinyuzhai4784/videos" target="_blank">
+            <button>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" />
+              </svg>
+              <span>Youtube</span>
+            </button>
+          </a>
+        </div>
+        <div class="menu-item" style="margin-right: 25px">
+          <button>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+              <path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z" />
+            </svg>
+            <span>Contact</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- inner menu -->
+  </div>
+  <!-- menu -->
 
-const cube = document.getElementById("cube");
+  <script type="text/javascript">
+    const cube = document.getElementById("cube");
 
+    let xVal = 25;
+    let yVal = 25;
 
-let xVal = 25;
-let yVal = 25;
+    function cameraMove(xPos, yPos) {
+      var winHeight = window.innerHeight / 2;
+      var winWidth = window.innerWidth / 2;
 
-function cameraMove(xPos, yPos) {
-	var winHeight = window.innerHeight / 2;
-	var winWidth = window.innerWidth / 2;
+      cube.style.transform = `rotateY(${(xPos - winWidth) / 25}deg) rotateX(${-(yPos - winHeight) / 25 - 8}deg) translateZ(100px) translateY(-140px)`;
+    }
 
-	cube.style.transform = `rotateY(${(xPos - winWidth) / 25}deg) rotateX(${(-(yPos - winHeight) / 25) - 8}deg) translateZ(100px) translateY(-140px)`;
-}
+    let moveControl = e => {
+      cube.style.transition = `transform 0.01s ease-in-out 0s`;
+      cameraMove(e.clientX, e.clientY);
+      // console.log(e.clientX, e.clientY);
+    };
 
+    let resetToCenter = () => {
+      cube.style.transition = `transform 0.5s ease-in-out 0s`;
+      cameraMove(window.innerWidth / 2, window.innerHeight / 2);
+    };
 
-let moveControl = (e) => {
-	cube.style.transition = `transform 0.01s ease-in-out 0s`;
-	cameraMove(e.clientX, e.clientY);
-	// console.log(e.clientX, e.clientY);
-}
+    document.addEventListener("mousemove", moveControl);
 
+    document.addEventListener("mouseleave", resetToCenter);
 
-let resetToCenter = () => {
-	cube.style.transition = `transform 0.5s ease-in-out 0s`;
-	cameraMove(window.innerWidth / 2, window.innerHeight / 2);
-}
-
-
-
-document.addEventListener("mousemove", moveControl);
-
-document.addEventListener("mouseleave", resetToCenter);
-
-window.addEventListener("mouseout", resetToCenter);
-
-
-
-</script>
+    window.addEventListener("mouseout", resetToCenter);
+  </script>
 </body>
