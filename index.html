@@ -6,8 +6,29 @@
   <style>
     html {
       /*overflow: hidden;
-    touch-action: none;
-    content-zooming: none;*/
+     touch-action: none;
+     content-zooming: none;*/
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background-color: hsla(1, 1, 1, 0);
+    }
+
+    ::-webkit-scrollbar-corner {
+      background: hsla(1, 1, 1, 0);
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #3e69b0;
+      border-radius: 16px;
+      opacity: 0.7;
     }
 
     body {
@@ -18,7 +39,16 @@
       height: 100%;
       font-family: "Josefin Sans", sans-serif;
       user-select: none;
+      background-color: black;
+    }
+
+    body {
       --menu-height: 100px;
+      --cv-width: 700px;
+      --cv-height: 700px;
+      --cv-left: calc((100vw - var(--cv-width)) / 2);
+      --cv-top: calc((100vh - var(--cv-height) - var(--menu-height)) / 2);
+			--cv-content-height: 600px;
     }
 
     #menu {
@@ -49,7 +79,7 @@
       gap: 25px;
       width: 100vw;
       max-width: 1200px;
-      min-width: 950px;
+      min-width: 900px;
     }
 
     .menu-block {
@@ -59,10 +89,39 @@
       gap: 25px;
     }
 
-    @media screen and (max-width: 950px) {
+    @media screen and (max-width: 900px) {
       body {
-        --menu-height: 330px;
+        --menu-height: 0px;
+        --view-width: 100vw;
+				--cv-width: 320px;
+				--cv-height: calc(100vh - var(--menu-height) - 100px);
+        --view-height: calc(100vh - var(--menu-height));
+				--cv-content-height: calc(var(--cv-height) - 220px);
+        --cv-content-width: calc(var(--cv-width) - 40px);
       }
+
+			#cv {
+				z-index: 1000;
+				border-radius: 0px;
+				padding: 0px;
+				position: static;
+      width: var(--cv-width);
+      height: var(--cv-height);
+      left: var(--cv-left);
+      top: var(--cv-top);
+
+      z-index: 101;
+      transition: opacity 1.5s ease-in-out;
+			}
+
+			#cvContent {
+				position: absolute;
+				overflow-x: hidden;
+      overflow-y: scroll;
+      background-color: rgb(4, 11, 36);
+      border-radius: 16px;
+      padding: 10px;
+			}
 
       #inner-menu {
         display: flex;
@@ -73,6 +132,35 @@
         width: 100vw;
       }
 
+			#cvHeader {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+			flex-direction: column;
+      gap: 5px;
+      padding: 0px;
+      padding-bottom: 0px;
+    }
+		.imageBlock {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			max-width: 100%;
+		}
+
+		.imageBlock img {
+			max-width: 100%;
+		}
+
+		.imageStack img {
+			max-width: 100%;
+		}
+
+		.content-flex {
+			flex-direction: column;
+		}
+
       .menu-block {
         display: flex;
         flex-direction: column;
@@ -82,7 +170,7 @@
       }
 
       button {
-        width: 160px;
+        width: 180px;
       }
     }
 
@@ -99,6 +187,7 @@
       justify-content: center;
       align-items: center;
       gap: 5px;
+			white-space: nowrap;
     }
 
     button svg {
@@ -192,9 +281,414 @@
       transition: outline 0.5s ease-in-out 0s;
       cursor: pointer;
     }
+
+    #cv {
+      position: fixed;
+      width: var(--cv-width);
+      height: var(--cv-height);
+      left: var(--cv-left);
+      top: var(--cv-top);
+      /* top: calc(calc(100vh - calc((100vh - var(--menu-height)) * 0.7)) / 2); */
+      /* height: calc((100vh - var(--menu-height)) * 0.7); */
+      background-color: black;
+      z-index: 101;
+
+      border-radius: 16px;
+      padding: 10px;
+      transition: opacity 1.5s ease-in-out;
+      opacity: 0;
+    }
+
+
+    #cvContent {
+      overflow-x: hidden;
+      overflow-y: scroll;
+      height: var(--cv-content-height);
+      width: var(--cv-content-width);
+      min-width: 280px;
+      background-color: rgb(4, 11, 36);
+      border-radius: 16px;
+      padding: 10px;
+    }
+
+    #cvHeader {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      padding: 10px;
+      padding-bottom: 20px;
+    }
+
+    #shadow {
+      position: fixed;
+      width: 100%;
+      height: calc(100% - var(--menu-height) - 2px);
+      background: rgb(255, 255, 255);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(93, 0, 134, 1) 100%);
+      opacity: 0.8;
+      z-index: 100;
+      overflow: hidden;
+      transition: opacity 1.5s ease-in-out;
+      opacity: 0;
+    }
+
+    details summary {
+      cursor: pointer;
+      color: #3e69b0;
+      margin-bottom: 10px;
+      font-size: 25px;
+      border-bottom: 2px solid #3e69b0;
+      padding-bottom: 5px;
+    }
+
+    details[open] summary {
+      color: #badfe7;
+      border-bottom: 2px solid #badfe7;
+    }
+
+    summary {
+      display: block;
+    }
+
+    details summary > * {
+      display: inline;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    details {
+      border-radius: 16px;
+      color: #3e69b0;
+      padding: 10px;
+    }
+
+    .content {
+      /* border: 1px solid #3e69b0;
+       border-radius: 16px;
+       background-color: #0c101e; */
+      padding: 10px;
+    }
+
+    .content-flex {
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: 0;
+    }
+
+		.content-flex-large {
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      gap: 10px;
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: 0;
+			color: #badfe7;
+    }
+
+    .talent {
+      border: 1px solid #3e69b0;
+      border-radius: 16px;
+      padding: 15px;
+    }
+
+		.highlight {
+			color: #badfe7;
+		}
+
+    .talent > h3 {
+      padding: 0px;
+      margin: 0px;
+      color: #badfe7;
+    }
+    .talent > p {
+      padding: 0px;
+      margin: 0px;
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+		.link {
+			color: #badfe7;
+		}
+		.link:visited {
+			color: #badfe7;
+		}
+		.link:active {
+			color: #badfe7;
+		}
+
+		.talent-skill {
+			padding: 15px;
+			margin: 0px;
+		}
+
+		.imageBlock {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.imageStack {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.edu {
+			border: 1px solid #3e69b0;
+			border-radius: 16px;
+			padding: 15px;
+			margin: 15px;
+		}
+
+		.edu h3 {
+			padding: 0px;
+			margin: 5px;
+		}
+
+		.edu h4 {
+			padding: 0px;
+			margin: 5px;
+		}
+
+    @media screen and (max-height: 850px) {
+      body {
+        --cv-height: 400px;
+        --cv-content-height: 300px;
+      }
+    }
+
+    @media screen and (max-width: 900px) {
+      body {
+        --cv-width: 100vw;
+      --cv-height: 100vh;
+      --cv-left: 0;
+      --cv-top: 0;
+      --cv-content-height: calc(var(--cv-height) - 240px);
+      }
+      #cv {
+        opacity: 1;
+        min-width: 320px;
+      }
+    }
+
+
+
   </style>
 </head>
 <body>
+  <div id="shadow"></div>
+  <div id="cv">
+    <div id="cvHeader">
+      <div class="menu-block">
+        <div class="menu-item">
+          <img src="images/dragonPearl.png" width="100px" />
+        </div>
+
+        <div class="menu-item">
+          <h2 class="heading">Joshua Viney</h2>
+          <p class="subscript">Javascript Engineer</p>
+        </div>
+      </div>
+
+      <a href="images/JoshuaVineyCV.pdf" download="JoshuaVineyCV.pdf">
+        <button>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+            <path d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V304H176c-35.3 0-64 28.7-64 64V512H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128zM176 352h32c30.9 0 56 25.1 56 56s-25.1 56-56 56H192v32c0 8.8-7.2 16-16 16s-16-7.2-16-16V448 368c0-8.8 7.2-16 16-16zm32 80c13.3 0 24-10.7 24-24s-10.7-24-24-24H192v48h16zm96-80h32c26.5 0 48 21.5 48 48v64c0 26.5-21.5 48-48 48H304c-8.8 0-16-7.2-16-16V368c0-8.8 7.2-16 16-16zm32 128c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H320v96h16zm80-112c0-8.8 7.2-16 16-16h48c8.8 0 16 7.2 16 16s-7.2 16-16 16H448v32h32c8.8 0 16 7.2 16 16s-7.2 16-16 16H448v48c0 8.8-7.2 16-16 16s-16-7.2-16-16V432 368z" />
+          </svg>
+          <span>Download as PDF</span>
+        </button>
+      </a>
+    </div>
+
+    <div id="cvContent">
+      <details>
+        <summary>See My Work!</summary>
+        <div class="content">
+					<div class="imageBlock" >
+						<img src="images/puppetMasterLogo.png" width="150"/>
+						<img src="images/puppetMasterApp.png" width="450"/>
+					</div>
+          <p>You can download my latest desktop app <a class="link" href="https://github.com/Mystagogue/puppet-master" target="_blank">"Puppet Master"</a> from Github. This app is built with Electron and React using Material-UI Components. It is a good showcase of my work in React.</p>
+					<p>Puppet Master combines browser automation with regular surfing! You can use the browser while automating it - and it makes doing that super easy! Perfect for manual testing, webscraping and power users.</p>
+					<p>The app involves the complex state management of the integrated file system. Multi-processing and virtual machines for the execution fo user input code. Complex themeing to deal with switching the theme of the code editor, component libraries and application at the same time.</p>
+					<div class="imageStack" >
+						<img src="images/MidasTouchMenu.png" width="500"/>
+						<img src="images/midasTouchGame.png" width="500"/>
+					</div>
+					<p><em>Midas Touch</em> was a web-app designed to train Forex traders. They can access historical data and execute fake trades on that data. When you begin the app hides the future data from you and plays back time very quickly. You execute trades and guage your performance. The app contains many "indicators" which are formula for analysing the change of data over time. These were all created from scratch for the applcation.</p>
+					<h3 style="color:#badfe7;">Former Clients</h3>
+					<div class="content-flex-large">
+						<ul class="talent-skill">
+							<li>G4S</li>
+							<li>NatWest</li>
+							<li>RBS</li>
+							<li>Barclays</li>
+							<li class="last">LifeSearch</li>
+						</ul>
+	
+						<ul class="talent-skill">
+							<li>Hoya</li>
+							<li>Seiko</li>
+							<li>Costco</li>
+							<li>Maybourne Hotel Group</li>
+							<li class="last">Atlanta Group</li>
+						</ul>
+					</div>
+				</div>
+      </details>
+
+      <details>
+        <summary>Profile</summary>
+        <div class="content">
+          <p class="highlight">Graduated in Physics from Southampton University. Lived in rural China for 12 years. Returned to England on a permanent basis. Work in Tech.</p>
+          <p>After graduating I travelled to China to pursue my childhood fascination with Kung-Fu. What was intended to be a 6 month trip turned into a 12 year expedition in the mountain villages of Henan province. I trained Kung-Fu and meditation, taught, got married and followed a very different way of life. But it was never my intention to stay in China forever and in 2017 my wife finally persuaeded me Kung-Fu was not a great career choice and I returned to Britain on a permanent basis. Here I work in tech.</p>
+
+          <p>I had some programming experience from university and did some freelance work remotely while I lived in China. For the last 6 years I have worked in software development agencies in England.</p>
+
+          <p>The first agency I worked for here had a small permanent team but employed a lot of contractors remotely. My work was primarily FED on JAMstack apps with Java backends and React frontends (web apps, desktop apps and mobile apps). However because of the nature of a small permanent team managing many projects I ended up doing a lot of technical project management, specification and acceptance testing as well as writing automated tests and a lot of SQL.</p>
+
+          <p>Our typical stack was MacOS, AWS, MySql, Java, Maven, React, Material-UI, Webpack, Git, Jira. Agile startup methodology. All technical staff, low admin.</p>
+
+          <p>The second agency I worked for is kind of the opposite of that. Enterprise, Large permanent staff, no contractors. Waterfall methodology, high admin. Windows, Azure, TSql, C#, .Net MVC, CMSs, Sass and Gulp, Git, Target-Process.</p>
+
+          <p>My current role is Dev Team Technical Analyst with a focus on JS. This is not a very clear name but it is similar to a Technical Solutions Architect role. I run requirement capture meetings with the clients. I write functional specifications. I explore any APIs we are going to use and set them up in Postman. I estimate hours and pricing and request resources. I collaborate on technical specifciations with BEDs. I complete Production FED work and delegate. I do acceptance testing of BED and code review of FED. I profile the code and debug any hotpaths. I hand over to the QA team and I write the release notes and oversee deployment. Bascially shepherding a project through its various phases, though most involved in production.</p>
+
+          <p>My primary skill is React, designing components and the state management of complex applications. I am comfortable using many Javascript frameworks and libraries and experienced at researching and picking up new ones. I am not a back-end focused developer however I can make contributions to any project with a Node back-end, be it interacting with a database, other APIs, the file system, multi-processing or virtual machines. I can use C# and a portion of my role is debugging the back end. That sounds odd for a FED but when you write the specs you find your one of the few people who knows how everything fits together as a whole and so inevitably bugs come to you first.</p>
+
+          <p>My greatest strength is self sufficiency. That doesn't mean I don't work well in a team rather it means I don't need to be chased or spoon-fed. Because my work has had me touch both management and development roles in software, I know what each expects from the other and can form a bridge between the two. I can follow a spec, estimate time, communicate progress and I always know what the priority is. I can test my own work and I can do the neccessary admin, both before and after. I know how to leave clear comms so even if I am not there someone else can continue what I started or know what and how they are supposed to test. I am client facing and I can run meetings. I was a Kung-Fu instructor for years and I can teach JS. I have led teams and followed and I am comfortable in either position. I take personal responsibility for my work and I genuinely enjoy doing it.</p>
+        </div>
+      </details>
+      <details open>
+        <summary>Competencies</summary>
+        <div class="content-flex">
+          <div class="talent">
+            <h3>Javascript Development</h2>
+            <p>Using HTML, CSS, Javascript, Node, various frameworks and UI libraries to create responsive web apps. Configuring and optimising Node build processes. Modular component architecture. State management. React, Redux and Material-UI is my goto stack. Puppeteer for auotmated testing.</p>
+          </div>
+
+          <div class="talent">
+            <h3>Solutions Architecture</h2>
+            <p>Requirements capture, functional and technical specification, acceptance testing and code review, CPU profiling, Ensuring scalability and maintainability of new features, ensuring security and compliance, maintaining team momentum, documentation.</p>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Tech</summary>
+        <div class="content-flex">
+        
+            <ul class="talent-skill">
+              <li>Javascript</li>
+              <li>React</li>
+              <li>Node</li>
+              <li>Electron</li>
+              <li class="last">Redux</li>
+            </ul>
+
+            <ul class="talent-skill">
+              <li>Material UI Components</li>
+              <li>SASS</li>
+              <li>Styled Components</li>
+              <li>Next JS</li>
+              <li class="last">Webpack</li>
+            </ul>
+
+            <ul class="talent-skill">
+              <li>C#</li>
+              <li>.Net MVC</li>
+              <li>Git</li>
+              <li>SQL</li>
+              <li class="last">Puppeteer</li>
+            </ul>
+
+            <ul class="talent-skill">
+              <li>Salesforce</li>
+              <li>Wordpress</li>
+              <li>Episerver</li>
+              <li>Sitefintiy</li>
+              <li class="last">Jira</li>
+            </ul>
+         
+        </div>
+      </details>
+
+      <details>
+        <summary>Education</summary>
+        <div class="image-stack">
+          <div class="edu">
+            <h3>Canford School</h2>
+            <h4 style="color:#badfe7;">A-Level <em>Maths, Physics, Chemistry</em> A A A</h3>
+            <h4>1998 - 2000</h4>
+          </div>
+
+          <div class="edu">
+            <h3>University of Southampton</h2>
+            <h4 style="color:#badfe7;">Bachelor's degree, <em>Physics</em>, 2:1</h3>
+            <h4>2001 - 2004</h4>
+          </div>
+
+          <div class="edu">
+            <h3>Tagou Sports Institute</h2>
+            <h4 style="color:#badfe7;"><em>Wushu</em> 5th Duan</h3>
+            <h4>2005 - 2008</h4>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>Experience</summary>
+        <div class="content">
+          <div class="edu">
+            <h3>Jiang Hu, Shanghai</h2>
+            <h3 style="color:#badfe7;">Instructor, Researcher</h3>
+            <h4>Mar 2016 - Dec 2017</h4>
+            <p style="margin-bottom: 6px">-Jiang Hu worked with management consultants in Shanghai to apply Zen martial arts training, meditation and philosophy to the business environment. I worked as a lecturer but also produced synopses of valuable works on the subject for the consumption of businesss leaders. Perhaps surprisingly (or perhaps not) Zen philosophy of action has a great deal in common with modern agile development principles.</p>
+          </div>
+
+          <div class="edu">
+            <h3>T T Consultants Ltd.</h2>
+            <h3 style="color:#badfe7;">Front End Developer, Full-time</h3>
+            <h4>Jan 2018 – Apr 2020</h4>
+            <p style="margin-bottom: 6px"><strong>Day to Day:</strong> Javascript, React, Node, GIT, SQL, AWS, npm, VS-Code, Data-Grip, PHPMyAdmin, Wordpress, Material-UI, Jira, Trello, Active Collab, Skype, Slack, Illustrator, Photoshop, Excel, Word.</p>
+
+            <p style="margin-bottom: 4px">Front end, DB queries, General QA, Spec New Work, Project Management.</p>
+          </div>
+
+          <div class="edu">
+            <h3>Freelance (lockdown)</h2>
+            <h3 style="color:#badfe7;">Javascript Developer</h3>
+            <h4>Apr 2020 – Sep 2020</h4>
+            <p style="margin-bottom: 6px"><strong>Day to Day:</strong> Javascript. Solo developer of a Fintech electron desktop app for a private contract. Training system for Forex trading including numerous indicators and their display on candle charts.</p>
+
+            <p style="margin-bottom: 4px">Front end, DB queries, General QA, Spec New Work, Project Management.</p>
+          </div>
+
+          <div class="edu">
+            <h3>Appius</h2>
+            <h3 style="color:#badfe7;">Dev Team Technical Analyst, Full-time</h3>
+            <h4>Sep 2020 – Present</h4>
+            <p style="margin-bottom: 6px"><strong>Day to Day:</strong> Javascript, React, Node, GIT, SQL, AWS, npm, VS-Code, Data-Grip, PHPMyAdmin, Wordpress, Material-UI, Jira, Trello, Active Collab, Skype, Slack, Illustrator, Photoshop, Excel, Word.</p>
+
+            <p style="margin-bottom: 4px">Front end, DB queries, General QA, Spec New Work, Project Management.</p>
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+
   <div id="screen">
     <div id="cube" class="cube">
       <div id="1" class="monk" style="transform: translateY(0px) translateZ(-250px) translateX(-100px); top: -100px; left: -100px"><img src="images/LargeTingZi.png" width="400px" height="400px" /></div>
@@ -284,15 +778,13 @@
       </div>
       <div class="menu-block">
         <div class="menu-item">
-          <a href="images/JoshuaVineyCV.pdf" download="JoshuaVineyCV.pdf">
-            <button>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-                <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                <path d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128z" />
-              </svg>
-              <span>Curriculum Vitae</span>
-            </button>
-          </a>
+          <button id="cvButton">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+              <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+              <path d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128z" />
+            </svg>
+            <span>Curriculum Vitae</span>
+          </button>
         </div>
         <!--        <div class="menu-item">
           <button>
@@ -302,6 +794,14 @@
             <span>CV</span>
           </button>
         </div> -->
+				<div class="menu-item">
+          <a href="https://www.linkedin.com/in/joshua-viney-17a179157" target="_blank">
+            <button>
+							<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+              <span>LinkedIn</span>
+            </button>
+          </a>
+        </div>
         <div class="menu-item">
           <a href="https://github.com/Mystagogue/puppet-master" target="_blank">
             <button>
@@ -324,15 +824,15 @@
             </button>
           </a>
         </div>
-        <div class="menu-item">
+        <!-- <div class="menu-item">
           <button>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-              <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+
               <path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z" />
             </svg>
             <span>Contact</span>
           </button>
-        </div>
+        </div> -->
       </div>
     </div>
     <!-- inner menu -->
@@ -340,28 +840,36 @@
   <!-- menu -->
 
   <script type="text/javascript">
+    ////////////////////
+    //////// 3D CONTROL
+    ////////////////////
+
     const cube = document.getElementById("cube");
     const screen = document.getElementById("screen");
 
     let xVal = 25;
     let yVal = 25;
 
-    function cameraMove(xPos, yPos) {
+    function cameraMove(xPos, yPos, zTrans, yTrans) {
       var winHeight = window.innerHeight / 2;
       var winWidth = window.innerWidth / 2;
 
-      cube.style.transform = `rotateY(${(xPos - winWidth) / 25}deg) rotateX(${-(yPos - winHeight) / 25 - 8}deg) translateZ(100px) translateY(-140px)`;
+      cube.style.transform = `rotateY(${(xPos - winWidth) / 25}deg) rotateX(${-(yPos - winHeight) / 25 - 8}deg) translateZ(${zTrans}px) translateY(${yTrans}px)`;
     }
 
     let moveControl = e => {
-      cube.style.transition = `transform 0.01s ease-in-out 0s`;
-      cameraMove(e.clientX, e.clientY);
+      if(window.innerWidth > 900) {
+        cube.style.transition = `transform 0.01s ease-in-out 0s`;
+      cameraMove(e.clientX, e.clientY, 100, -140);
       // console.log(e.clientX, e.clientY);
+      }
     };
 
     let resetToCenter = () => {
-      cube.style.transition = `transform 0.5s ease-in-out 0s`;
-      cameraMove(window.innerWidth / 2, window.innerHeight / 2);
+      if(window.innerWidth > 900) {
+        cube.style.transition = `transform 0.5s ease-in-out 0s`;
+      cameraMove(window.innerWidth / 2, window.innerHeight / 2, 100, -140);
+      }
     };
 
     screen.addEventListener("mousemove", moveControl);
@@ -369,5 +877,55 @@
     screen.addEventListener("mouseleave", resetToCenter);
 
     window.addEventListener("mouseout", resetToCenter);
+
+    ////////////////////
+    ///// CV CONTROL
+    ////////////////////
+    const cv = document.getElementById("cv");
+    const cvButton = document.getElementById("cvButton");
+    const shadow = document.getElementById("shadow");
+    let zoomed = false;
+
+    cvButton.addEventListener("click", event => {
+      if (zoomed == false) {
+        cv.style.visibility = "visible";
+        cv.style.opacity = 1;
+        shadow.style.visibility = "visible";
+        shadow.style.opacity = 1;
+        zoomed = true;
+        screen.removeEventListener("mousemove", moveControl);
+        screen.removeEventListener("mouseleave", resetToCenter);
+        window.removeEventListener("mouseout", resetToCenter);
+        cube.style.transition = `transform 1.5s ease-in-out 0s`;
+        cameraMove(window.innerWidth / 2, window.innerHeight / 2, 750, -240);
+      } else {
+        zoomed = false;
+        //cv.hidden = true;
+        //cv.style.visibility = "hidden";
+        cv.style.opacity = 0;
+        shadow.style.opacity = 0;
+        cube.style.transition = `transform 1.5s ease-in-out 0s`;
+        cameraMove(window.innerWidth / 2, window.innerHeight / 2, 100, -140);
+      }
+    });
+
+    cube.addEventListener("transitionend", event => {
+      if (zoomed == false) {
+        //cv.hidden = false;
+        cv.style.visibility = "hidden";
+        shadow.style.visibility = "hidden";
+        //cv.style.opacity = 1;
+        screen.addEventListener("mousemove", moveControl);
+        screen.addEventListener("mouseleave", resetToCenter);
+        window.addEventListener("mouseout", resetToCenter);
+      }
+    });
+
+    window.addEventListener("resize", (event) => {
+      if(cv.style.visibility == "hidden" && window.innerWidth < 900) {
+        cv.style.visibility = "visible";
+        cv.style.opacity = 1;
+      }
+    })
   </script>
 </body>
