@@ -462,10 +462,17 @@
 			margin: 5px;
 		}
 
-    @media screen and (max-height: 850px) {
+    @media screen and (max-height: 690px) {
       body {
         --cv-height: 400px;
         --cv-content-height: 300px;
+      }
+    }
+
+    @media screen and (max-height: 850px) and (min-height: 690px) {
+      body {
+        --cv-height: 550px;
+        --cv-content-height: 450px;
       }
     }
 
